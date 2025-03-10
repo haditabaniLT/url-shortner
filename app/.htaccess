@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /
+
+# Serve existing files or directories as-is
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# If the URL is a 6-character code, redirect to redirect.php
+RewriteRule ^([0-9A-Za-z]{6})$ redirect.php?c=$1 [L,QSA]
+
+# Everything else goes to index.php
+RewriteRule ^ index.php [L,QSA]

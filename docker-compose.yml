@@ -1,0 +1,42 @@
+services:
+  haproxy:
+    image: haproxy:2.6
+    container_name: url-haproxy
+    # Map your haproxy.cfg into the container
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    # Expose port 80 on the host so HAProxy can listen
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+  web:
+    build: .
+    container_name: url-web
+    # We use "expose" instead of "ports" so that only HAProxy accesses the web container on port 80
+    expose:
+      - "80"
+    volumes:
+      - ./app:/var/www/html
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    container_name: url-db
+    image: mariadb:10.11
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:
