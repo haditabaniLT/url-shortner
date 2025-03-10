@@ -16,10 +16,15 @@ A lightweight PHP & MySQL-based URL shortener, fronted by HAProxy for reverse pr
 ---
 
 ## Prerequisites
-- [Docker](https://www.docker.com/) installed
-- [Docker Compose](https://docs.docker.com/compose/) installed
+- [Docker](https://www.docker.com/) 
+- [Docker Compose](https://docs.docker.com/compose/) 
 
 ---
+
+## Getting Started
+
+### 1. Project Structure
+
 Your folder might look like this:
 url-shortener/
 ├─ app/
@@ -38,16 +43,10 @@ url-shortener/
 
 ## Getting Started
 
-### 1. Project Structure
-
-Your folder might look like this:
-
-## Getting Started
-
 1. **Clone or download** this repository:
    ```bash
-   git clone https://github.com/your-username/url-shortener.git
-   cd url-shortener
+   git clone [https://github.com/your-username/url-shortener.git](https://github.com/haditabaniLT/url-shortner/)
+   cd url-shortner
 
 2. **Set up environment variables in the .env file** (if needed):
     DB_HOST=db
